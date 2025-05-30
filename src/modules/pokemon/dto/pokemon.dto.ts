@@ -1,10 +1,10 @@
-import { PokeAbilities } from "../types/pokeability.type";
-import { PokeCries } from "../types/pokecries.type";
-import { PokeForms } from "../types/pokeforms.type";
-import { PokeItems } from "../types/pokeitems.type";
-import { PokeSprites } from "../types/pokesprites.type";
-import { PokeStats } from "../types/pokestats.type";
-import { PokeTypes } from "../types/poketypes.type";
+import { PokeAbilities } from "../types/pokemon/pokeability.type";
+import { PokeCries } from "../types/pokemon/pokecries.type";
+import { PokeForms } from "../types/pokemon/pokeforms.type";
+import { PokeItems } from "../types/pokemon/pokeitems.type";
+import { PokeSprites } from "../types/pokemon/pokesprites.type";
+import { PokeStats } from "../types/pokemon/pokestats.type";
+import { PokeTypes } from "../types/pokemon/poketypes.type";
 
 export class PokemonDTO {
   id: number;

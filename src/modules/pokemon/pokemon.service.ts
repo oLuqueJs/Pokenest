@@ -2,6 +2,7 @@ import { HttpService } from "@nestjs/axios";
 import { BadRequestException, HttpException, HttpStatus, Injectable, ServiceUnavailableException } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
 import { PokemonDTO } from "./dto/pokemon.dto";
+import { PokemonCharacteristicsDTO } from "./dto/pokemon-characteristics.dto";
 
 @Injectable()
 export class PokemonService {
@@ -9,7 +10,7 @@ export class PokemonService {
     private readonly httpService: HttpService
   ) {}
 
-  private BASE_API_URL = `${process.env.POKEAPI_URL}/pokemon/`;
+  private BASE_API_URL = `${process.env.POKEAPI_URL}`;
 
   async fetchFromPokeAPI<T>(endpoint: string): Promise<T> {
     try {
@@ -35,10 +36,10 @@ export class PokemonService {
 
   async getPokemonInfoByName(pokeI: string): Promise<PokemonDTO> {
     if (!pokeI) {
-      throw new BadRequestException('Pokemon name is required')
+      throw new BadRequestException('Pokemon ID or name is required.')
     }
 
-    const REQ_URL = `${this.BASE_API_URL}${pokeI.toLowerCase()}`;
+    const REQ_URL = `${this.BASE_API_URL}pokemon/${pokeI.toLowerCase()}`;
     const data = await this.fetchFromPokeAPI<PokemonDTO>(REQ_URL)
       
     if (!data) {
@@ -58,5 +59,27 @@ export class PokemonService {
       cries: data.cries,
       sprites: data.sprites,
     };
+  }
+
+
+  async getPokemonCharacteristics(pokeI: string): Promise<PokemonCharacteristicsDTO> {
+    if (!pokeI) {
+      throw new BadRequestException('Pokemon ID or name is required.')
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}characteristic/${pokeI.toLowerCase()}`
+    const data = await this.fetchFromPokeAPI<PokemonCharacteristicsDTO>(REQ_URL)
+
+    if (!data) {
+      throw new ServiceUnavailableException('PokeAPI is not avaiable')
+    }
+
+    return {
+      id: data.id,
+      gene_modulo: data.gene_modulo,
+      possible_values: data.possible_values,
+      highest_stat: data.highest_stat,
+      descriptions: data.descriptions
+    }
   }
 }

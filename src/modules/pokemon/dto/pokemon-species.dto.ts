@@ -1,0 +1,43 @@
+import { SpeciesColor } from "../types/species/spe-color.type";
+import { SpeciesEggGroups } from "../types/species/spe-egg-groups.type";
+import { SpeciesEvolutionChain } from "../types/species/spe-evolution-chain.type";
+import { SpeciesEvolvesFrom } from "../types/species/spe-evolves.type";
+import { SpeciesFlavorText } from "../types/species/spe-flavor-text.type";
+import { SpeciesFormDescription } from "../types/species/spe-form-description.type";
+import { SpeciesGenera } from "../types/species/spe-genera.type";
+import { SpeciesGeneration } from "../types/species/spe-generation.type";
+import { SpeciesGrowthRate } from "../types/species/spe-growth-rate.type";
+import { SpeciesHabitat } from "../types/species/spe-habitat.type";
+import { SpeciesNames } from "../types/species/spe-names.type";
+import { SpeciesPokedexNumbers } from "../types/species/spe-pokedex-numbers.type";
+import { SpeciesShape } from "../types/species/spe-shape.type";
+import { SpeciesVarieties } from "../types/species/spe-varieties.type";
+
+export class PokemonSpeciesDTO {
+  id: number;
+  name: string;
+  order: number;
+  gender_rate: number;
+  capture_rate: number;
+  base_hapiness: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  hatch_counter: number;
+  has_gender_differences: boolean;
+  forms_switchable: boolean;
+  growth_rate: SpeciesGrowthRate;
+  pokedex_numbers: SpeciesPokedexNumbers[];
+  egg_groups: SpeciesEggGroups[];
+  color: SpeciesColor;
+  shape: SpeciesShape;
+  evolves_from_species: SpeciesEvolvesFrom;
+  evolution_chain: SpeciesEvolutionChain;
+  habitat: SpeciesHabitat;
+  generation: SpeciesGeneration;
+  names: SpeciesNames[];
+  flavor_text_entires: SpeciesFlavorText[];
+  form_descriptions: SpeciesFormDescription[];
+  genera: SpeciesGenera[];
+  varieties: SpeciesVarieties[];
+}

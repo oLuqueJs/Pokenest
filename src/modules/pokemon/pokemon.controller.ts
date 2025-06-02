@@ -2,6 +2,7 @@ import { Controller, Get, Param } from "@nestjs/common";
 import { PokemonService } from "./pokemon.service";
 import { PokemonDTO } from "./dto/pokemon.dto";
 import { PokemonCharacteristicsDTO } from "./dto/pokemon-characteristics.dto";
+import { PokemonSpeciesDTO } from "./dto/pokemon-species.dto";
 
 @Controller('pokemon')
 export class PokemonController {
@@ -21,5 +22,12 @@ export class PokemonController {
     @Param('pokeI') pokeI: string
   ): Promise<PokemonCharacteristicsDTO> {
     return await this.pokemonService.getPokemonCharacteristics(pokeI)
+  }
+
+  @Get('/species/:pokeI')
+  async getPokeSPecies(
+    @Param('pokeI') pokeI: string
+  ): Promise<PokemonSpeciesDTO> {
+    return await this.pokemonService.getPokemonSpecies(pokeI)
   }
 }

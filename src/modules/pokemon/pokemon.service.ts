@@ -3,6 +3,7 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, ServiceUnav
 import { firstValueFrom } from "rxjs";
 import { PokemonDTO } from "./dto/pokemon.dto";
 import { PokemonCharacteristicsDTO } from "./dto/pokemon-characteristics.dto";
+import { PokemonSpeciesDTO } from "./dto/pokemon-species.dto";
 
 @Injectable()
 export class PokemonService {
@@ -64,7 +65,7 @@ export class PokemonService {
 
   async getPokemonCharacteristics(pokeI: string): Promise<PokemonCharacteristicsDTO> {
     if (!pokeI) {
-      throw new BadRequestException('Pokemon ID or name is required.')
+      throw new BadRequestException('Pokemon ID is required.')
     }
 
     const REQ_URL = `${this.BASE_API_URL}characteristic/${pokeI.toLowerCase()}`
@@ -81,5 +82,16 @@ export class PokemonService {
       highest_stat: data.highest_stat,
       descriptions: data.descriptions
     }
+  }
+
+  async getPokemonSpecies(pokeI: string): Promise<PokemonSpeciesDTO> {
+    if (!pokeI) {
+      throw new BadRequestException("Pokemon ID or name is required")
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}pokemon-species/${pokeI}`
+    const data = await this.fetchFromPokeAPI<PokemonSpeciesDTO>(REQ_URL)
+
+    return { ...data }
   }
 }

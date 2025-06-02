@@ -4,6 +4,7 @@ import { firstValueFrom } from "rxjs";
 import { PokemonDTO } from "./dto/pokemon.dto";
 import { PokemonCharacteristicsDTO } from "./dto/pokemon-characteristics.dto";
 import { PokemonSpeciesDTO } from "./dto/pokemon-species.dto";
+import { PokemonLocationDTO } from "./dto/pokemon-location.dto";
 
 @Injectable()
 export class PokemonService {
@@ -91,6 +92,17 @@ export class PokemonService {
 
     const REQ_URL = `${this.BASE_API_URL}pokemon-species/${pokeI}`
     const data = await this.fetchFromPokeAPI<PokemonSpeciesDTO>(REQ_URL)
+
+    return { ...data }
+  }
+
+  async getPokemonLocationAreas(pokeI: string): Promise<PokemonLocationDTO> {
+    if (!pokeI) {
+      throw new BadRequestException("Pokemon ID or name is required")
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}pokemon/${pokeI}/encounters`
+    const data = await this.fetchFromPokeAPI<PokemonLocationDTO>(REQ_URL);
 
     return { ...data }
   }

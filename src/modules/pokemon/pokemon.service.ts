@@ -4,6 +4,8 @@ import { firstValueFrom } from "rxjs";
 import { PokemonDTO } from "./dto/pokemon.dto";
 import { PokemonCharacteristicsDTO } from "./dto/pokemon-characteristics.dto";
 import { PokemonSpeciesDTO } from "./dto/pokemon-species.dto";
+import { PokemonLocationDTO } from "./dto/pokemon-location.dto";
+import { PokemonNatureDTO } from "./dto/pokemon-nature.dto";
 
 @Injectable()
 export class PokemonService {
@@ -35,7 +37,7 @@ export class PokemonService {
     }
   }
 
-  async getPokemonInfoByName(pokeI: string): Promise<PokemonDTO> {
+  async getPokemonInfo(pokeI: string): Promise<PokemonDTO> {
     if (!pokeI) {
       throw new BadRequestException('Pokemon ID or name is required.')
     }
@@ -71,10 +73,6 @@ export class PokemonService {
     const REQ_URL = `${this.BASE_API_URL}characteristic/${pokeI.toLowerCase()}`
     const data = await this.fetchFromPokeAPI<PokemonCharacteristicsDTO>(REQ_URL)
 
-    if (!data) {
-      throw new ServiceUnavailableException('PokeAPI is not avaiable')
-    }
-
     return {
       id: data.id,
       gene_modulo: data.gene_modulo,
@@ -91,6 +89,28 @@ export class PokemonService {
 
     const REQ_URL = `${this.BASE_API_URL}pokemon-species/${pokeI}`
     const data = await this.fetchFromPokeAPI<PokemonSpeciesDTO>(REQ_URL)
+
+    return { ...data }
+  }
+
+  async getPokemonLocationAreas(pokeI: string): Promise<PokemonLocationDTO> {
+    if (!pokeI) {
+      throw new BadRequestException("Pokemon ID or name is required")
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}pokemon/${pokeI}/encounters`
+    const data = await this.fetchFromPokeAPI<PokemonLocationDTO>(REQ_URL);
+
+    return { ...data }
+  }
+
+  async getPokemonNature(pokeI: string): Promise<PokemonNatureDTO> {
+    if (!pokeI) {
+      throw new BadRequestException("Pokemon ID or name is required")
+    }
+
+    const REQ_URL= `${this.BASE_API_URL}nature/${pokeI}`;
+    const data = await this.fetchFromPokeAPI<PokemonNatureDTO>(REQ_URL);
 
     return { ...data }
   }

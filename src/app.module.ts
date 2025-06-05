@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PokemonModule } from './modules/pokemon/pokemon.module';
+import { ItemModule } from './modules/item/item.module';
 
 @Module({
   imports: [
@@ -8,7 +9,8 @@ import { PokemonModule } from './modules/pokemon/pokemon.module';
       isGlobal: true,
       envFilePath: '.env'
     }),
-    PokemonModule
+    PokemonModule,
+    ItemModule,
   ],
   controllers: [],
   providers: [],

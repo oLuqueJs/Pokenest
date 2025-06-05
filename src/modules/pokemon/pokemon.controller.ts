@@ -16,7 +16,7 @@ export class PokemonController {
   async getPokemonInfo(
     @Param('pokeI') pokeI: string
   ): Promise<PokemonDTO> {
-    return await this.pokemonService.getPokemonInfoByName(pokeI);
+    return await this.pokemonService.getPokemonInfo(pokeI);
   }
 
   @Get('/characteristic/:pokeI')

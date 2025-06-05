@@ -37,7 +37,7 @@ export class PokemonService {
     }
   }
 
-  async getPokemonInfoByName(pokeI: string): Promise<PokemonDTO> {
+  async getPokemonInfo(pokeI: string): Promise<PokemonDTO> {
     if (!pokeI) {
       throw new BadRequestException('Pokemon ID or name is required.')
     }

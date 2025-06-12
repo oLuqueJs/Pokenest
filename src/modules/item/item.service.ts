@@ -3,6 +3,7 @@ import { BadRequestException, HttpException, HttpStatus, Injectable } from "@nes
 import { firstValueFrom } from "rxjs";
 import { ItemDTO } from "./dto/item.dto";
 import { ItemAttributesDto } from "./dto/item-attributes.dto";
+import { ItemCategoriesDTO } from "./dto/item-categories.dto";
 
 @Injectable()
 export class ItemService {
@@ -54,5 +55,16 @@ export class ItemService {
     const res = await this.fetchFromPokeApi<ItemAttributesDto>(REQ_URL)
 
     return { ...res };
+  }
+
+  async getItemCategories(itemI: string): Promise<ItemCategoriesDTO> {
+    if (!itemI) {
+      throw new BadRequestException("Item ID or name is required")
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}item-category/${itemI}`
+    const res = await this.fetchFromPokeApi<ItemCategoriesDTO>(REQ_URL);
+
+    return { ...res }
   }
 }

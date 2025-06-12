@@ -1,7 +1,8 @@
 import { HttpService } from "@nestjs/axios";
 import { BadRequestException, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
-import { ItemDto } from "./dto/item.dto";
+import { ItemDTO } from "./dto/item.dto";
+import { ItemAttributesDto } from "./dto/item-attributes.dto";
 
 @Injectable()
 export class ItemService {
@@ -33,13 +34,24 @@ export class ItemService {
     }
   }
 
-  async getItem(itemI: string): Promise<ItemDto> {
+  async getItem(itemI: string): Promise<ItemDTO> {
     if (!itemI) {
       throw new BadRequestException("Item ID or name is required")
     }
 
     const REQ_URL = `${this.BASE_API_URL}item/${itemI}`;
-    const res = await this.fetchFromPokeApi<ItemDto>(REQ_URL);
+    const res = await this.fetchFromPokeApi<ItemDTO>(REQ_URL);
+
+    return { ...res };
+  }
+
+  async getItemAttributes(itemI: string): Promise<ItemAttributesDto> {
+    if (!itemI) {
+      throw new BadRequestException("Item ID or name is required")
+    }
+
+    const REQ_URL = `${this.BASE_API_URL}item-attribute/${itemI}`
+    const res = await this.fetchFromPokeApi<ItemAttributesDto>(REQ_URL)
 
     return { ...res };
   }

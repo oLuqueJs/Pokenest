@@ -1,6 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ItemService } from "./item.service";
-import { ItemDto } from "./dto/item.dto";
+import { ItemDTO } from "./dto/item.dto";
+import { ItemAttributesDto } from "./dto/item-attributes.dto";
 
 @Controller('item')
 export class ItemController {
@@ -11,7 +12,14 @@ export class ItemController {
   @Get(':itemI')
   async getItem (
     @Param('itemI') itemI: string,
-  ): Promise<ItemDto> {
+  ): Promise<ItemDTO> {
     return await this.itemService.getItem(itemI)
+  }
+
+  @Get('/attributes/:itemI')
+  async getItemAttributes (
+    @Param('itemI') itemI: string,
+  ): Promise<ItemAttributesDto> {
+    return await this.itemService.getItemAttributes(itemI)
   }
 }

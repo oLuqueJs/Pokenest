@@ -5,11 +5,11 @@ import { ItemEffectEntries } from "../types/item/item-effect-entries.type";
 import { ItemFlavorText } from "../types/item/item-flavor-text.type";
 import { ItemFlingEffect } from "../types/item/item-fling-effect.type";
 import { ItemGameIndices } from "../types/item/item-game-indices.type";
-import { ItemNames } from "../types/item/item-names.type";
+import { ItemName } from "../types/item/item-name.type";
 import { ItemPokemonHeld } from "../types/item/item-pokemon-held.type";
 import { ItemSprites } from "../types/item/item-sprites.type";
 
-export class ItemDto {
+export class ItemDTO {
   id: number;
   name: string;
   cost: number;
@@ -20,7 +20,7 @@ export class ItemDto {
   effect_entries: ItemEffectEntries[];
   flavor_text_entries: ItemFlavorText[];
   game_indices: ItemGameIndices[];
-  names: ItemNames[];
+  names: ItemName[];
   held_by_pokemon: ItemPokemonHeld[];
   baby_trigger_for: ItemBabyTrigger;
   sprites: ItemSprites;

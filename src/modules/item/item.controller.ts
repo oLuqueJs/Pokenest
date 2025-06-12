@@ -1,6 +1,9 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ItemService } from "./item.service";
-import { ItemDto } from "./dto/item.dto";
+import { ItemDTO } from "./dto/item.dto";
+import { ItemAttributesDto } from "./dto/item-attributes.dto";
+import { ItemCategoriesDTO } from "./dto/item-categories.dto";
+import { ItemPocketsDTO } from "./dto/item-pockets.dto";
 
 @Controller('item')
 export class ItemController {
@@ -9,9 +12,30 @@ export class ItemController {
   ) {}
 
   @Get(':itemI')
-  async getItem (
+  async getItem(
     @Param('itemI') itemI: string,
-  ): Promise<ItemDto> {
+  ): Promise<ItemDTO> {
     return await this.itemService.getItem(itemI)
+  }
+
+  @Get('/attributes/:itemI')
+  async getItemAttributes(
+    @Param('itemI') itemI: string,
+  ): Promise<ItemAttributesDto> {
+    return await this.itemService.getItemAttributes(itemI)
+  }
+
+  @Get('/categories/:itemI')
+  async getItemCategories(
+    @Param('itemI') itemI: string
+  ): Promise<ItemCategoriesDTO> {
+    return await this.itemService.getItemCategories(itemI);
+  }
+
+  @Get('/pockets/:itemI')
+  async getItemPockets(
+    @Param('itemI') itemI: string
+  ): Promise<ItemPocketsDTO> {
+    return await this.itemService.getItemPockets(itemI)
   }
 }

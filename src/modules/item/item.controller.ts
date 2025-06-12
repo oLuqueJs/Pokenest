@@ -3,6 +3,7 @@ import { ItemService } from "./item.service";
 import { ItemDTO } from "./dto/item.dto";
 import { ItemAttributesDto } from "./dto/item-attributes.dto";
 import { ItemCategoriesDTO } from "./dto/item-categories.dto";
+import { ItemPocketsDTO } from "./dto/item-pockets.dto";
 
 @Controller('item')
 export class ItemController {
@@ -29,5 +30,12 @@ export class ItemController {
     @Param('itemI') itemI: string
   ): Promise<ItemCategoriesDTO> {
     return await this.itemService.getItemCategories(itemI);
+  }
+
+  @Get('/pockets/:itemI')
+  async getItemPockets(
+    @Param('itemI') itemI: string
+  ): Promise<ItemPocketsDTO> {
+    return await this.itemService.getItemPockets(itemI)
   }
 }

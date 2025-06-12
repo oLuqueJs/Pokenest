@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ItemService } from "./item.service";
-import { ItemDto } from "./dto/item.dto";
+import { ItemDTO } from "./dto/item.dto";
 
 @Controller('item')
 export class ItemController {
@@ -11,7 +11,7 @@ export class ItemController {
   @Get(':itemI')
   async getItem (
     @Param('itemI') itemI: string,
-  ): Promise<ItemDto> {
+  ): Promise<ItemDTO> {
     return await this.itemService.getItem(itemI)
   }
 }
